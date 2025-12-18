@@ -9,6 +9,6 @@
     <ShellContent
         Title="NHL Standings"
         ContentTemplate="{DataTemplate views:MainPage}"
-        Route="Pages.MainPage" />
+        Route="Views.MainPage" />
 
 </Shell>

@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels"
              xmlns:views="clr-namespace:MAUI_Uppgift.Views"
+             xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
              x:DataType="viewmodels:StandingViewModel"
              x:Class="MAUI_Uppgift.Views.StandingsView">
+    
     <Grid RowDefinitions="Auto, auto, *, auto,  *"
           ColumnDefinitions="80, *">
+
         <Picker Title="Select Conference"
                 Margin="0 15"
                 Grid.ColumnSpan="2"
@@ -15,13 +18,10 @@
                 SelectedItem="{Binding SelectedConference, Mode=TwoWay}"/>
 
 
-        <views:BusyOverlay IsBusy="{Binding IsBusy}"
-                           ImageSource="nhl_logo.png"
-                           ImageSize="48"
-                           Grid.ColumnSpan="2"
-                           Grid.RowSpan="5"/>
-        
-        <VerticalStackLayout Margin="10 0" Grid.Row="1" Grid.ColumnSpan="2">
+
+
+
+        <VerticalStackLayout Margin="10 0" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}} ">
             <Label Text="{Binding StandingDivision1}" 
                        HorizontalTextAlignment="Center" 
                        FontAttributes="Bold"
@@ -39,7 +39,7 @@
                         SelectionChangedCommand="{Binding SelectTeamCommand}"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StandingsCollection1}}"/>
         </VerticalStackLayout>
-        <VerticalStackLayout Margin="10 0" Grid.Row="2" Grid.ColumnSpan="2">
+        <VerticalStackLayout Margin="10 0" Grid.Row="2" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}}">
             <Label Text="{Binding StandingDivision2}" 
                        HorizontalTextAlignment="Center" 
                        FontAttributes="Bold"

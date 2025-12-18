@@ -25,26 +25,31 @@ namespace MAUI_Uppgift.ViewModels
         [RelayCommand]
         async Task LoadGame(GameRequest request)
         {
+            ClearError();
             IsBusy = true;
             try
             {
                 var loaded = await gamesService.GetGameDetailsForTeam(request.Date, request.Team);
                 if (loaded is null)
+                {
+                    SetError("Game not found");
+                    IsBusy = false;
                     return;
-
+                }
                 var primaryColor = await gamesService.GetHomeTeamPrimaryColor(loaded.HomeTeam);
                 PrimaryColor = primaryColor ?? "#FFFFFF";
 
 
-                    if (CurrentGame is null)
-                        CurrentGame = new GameItemViewModel(loaded);
-                    else
-                        CurrentGame.UpdateFromModel(loaded);
+                if (CurrentGame is null)
+                    CurrentGame = new GameItemViewModel(loaded);
+                else
+                    CurrentGame.UpdateFromModel(loaded);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                System.Diagnostics.Debug.WriteLine($"Error loading game: {ex.Message}");
+                SetError($"Unable to load gamedetails");
+
             }
             finally
             {

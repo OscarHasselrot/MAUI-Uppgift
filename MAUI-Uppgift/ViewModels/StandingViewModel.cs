@@ -57,6 +57,7 @@ namespace MAUI_Uppgift.ViewModels
             if (IsBusy)
                 return;
             IsBusy = true;
+            ClearError();
 
             try
             {
@@ -76,6 +77,10 @@ namespace MAUI_Uppgift.ViewModels
 
                 foreach (var standing in div2)
                     Standings2.Add(new StandingItemViewModel(standing));
+            }
+            catch (Exception )
+            {
+                SetError($"Unable to load standings: Check internet connection and try again.");
             }
             finally
             {

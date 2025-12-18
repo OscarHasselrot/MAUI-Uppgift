@@ -1,4 +1,4 @@
-namespace MAUI_Uppgift.Views;
+namespace MAUI_Uppgift.Views.Controls;
 
 using System.ComponentModel;
 

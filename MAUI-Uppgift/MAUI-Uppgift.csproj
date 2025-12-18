@@ -106,6 +106,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Views\Controls\ErrorControl.xaml.cs">
+		  <DependentUpon>ErrorControl.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\GameDetailPage.xaml.cs">
 		  <DependentUpon>GameDetailPage.xaml</DependentUpon>
 		</Compile>
@@ -115,19 +118,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="Views\BusyOverlay.xaml">
+		<MauiXaml Update="Views\Controls\BusyOverlay.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Controls\ErrorControl.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\GameDetailPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\GameDetailViews.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\PlayerDetailsPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\PlayerDetailsView.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\StandingsView.xaml">

@@ -2,18 +2,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodel="clr-namespace:MAUI_Uppgift.ViewModels"
+    xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
     xmlns:views="clr-namespace:MAUI_Uppgift.Views"
     x:Class="MAUI_Uppgift.Views.GameDetailPage"
     x:DataType="viewmodel:GameViewModel"
     Title="{Binding CurrentGame.Matchup}"
     BackgroundColor="{Binding PrimaryColor}">
-    
-    <VerticalStackLayout Padding="12" Spacing="12">
 
-        <Border Style="{StaticResource TeamDetailsBorder}">
-            <views:GameDetailViews BindingContext="{Binding CurrentGame}"/>
-            
-        </Border>
+    <Grid Padding="12">
 
-    </VerticalStackLayout>
+
+        <views:GameDetailViews BindingContext="{Binding CurrentGame}"
+                               IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}}"/>
+
+        <controllers:BusyOverlay IsBusy="{Binding IsBusy}"
+                                 ImageSource="nhl_logo.png"
+                                 ImageSize="48"
+                                 />
+
+        <controllers:ErrorControl HasError="{Binding HasError}"
+                                  ErrorMessage="{Binding ErrorMessage}"
+                                  />
+
+
+    </Grid>
 </ContentPage>

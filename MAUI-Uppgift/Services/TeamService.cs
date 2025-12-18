@@ -26,22 +26,7 @@ namespace MAUI_Uppgift.Services
                 return null;
             }
         }
-        public async Task<List<Player>> GetPlayersByTeamAsync(string team)
-        {
-            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/PlayersBasic/{team}?key={Config.ApiKey}";
-            using var response = await httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
-            var players = await response.Content.ReadFromJsonAsync<List<Player>>();
-            if (players != null)
-            {
-                players = [.. players.Where(p => p.Status == "Active").OrderBy(p => p.Jersey)];
-                return players;
-            }
-            else
-            {
-                return [];
-            }
-        }
+
         
     }
 }

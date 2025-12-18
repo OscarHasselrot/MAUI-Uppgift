@@ -59,7 +59,7 @@ namespace MAUI_Uppgift.ViewModels
         {
             if (IsBusy)
                 return;
-
+            ClearError();
             IsBusy = true;
             Abbreviation = abbreviation;
 
@@ -101,7 +101,10 @@ namespace MAUI_Uppgift.ViewModels
                 }
 
             }
-
+            catch(Exception)
+            {
+                SetError("Error loading team");
+            }
             finally
             {
                 IsBusy = false;

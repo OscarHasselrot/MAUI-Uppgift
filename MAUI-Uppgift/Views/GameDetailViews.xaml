@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels"
+             xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
              x:DataType="viewmodels:GameItemViewModel"
              x:Class="MAUI_Uppgift.Views.GameDetailViews">
     <ContentView.Resources>
@@ -9,9 +10,13 @@
     </ContentView.Resources>
 
     <VerticalStackLayout>
+
+        <Border Style="{StaticResource TeamDetailsBorder}">
         <Grid RowDefinitions="Auto,60,Auto,auto,auto" 
               ColumnDefinitions="*,*,*" 
               Padding="8">
+
+
 
             <Label Text="{Binding DisplayDate}"
                    Grid.Row="0" Grid.ColumnSpan="3"
@@ -103,5 +108,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
+        </Border>
     </VerticalStackLayout>
 </ContentView>
