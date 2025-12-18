@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels"
              xmlns:views="clr-namespace:MAUI_Uppgift.Views"
              xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodels:StandingViewModel"
              x:Class="MAUI_Uppgift.Views.StandingsView">
     <ScrollView>
@@ -11,15 +12,21 @@
         <Grid RowDefinitions="Auto, auto, *, auto,  *"
           ColumnDefinitions="80, *">
 
+            <Picker Title="Season"
+                    ItemsSource="{Binding Seasons}"
+                    SelectedItem="{Binding Season, Mode=TwoWay}"
+                    HorizontalOptions="Start"
+                    Margin="0 15"
+                    FontAttributes="Bold"
+                    FontSize="Medium"/>
             <Picker Title="Select Conference"
-                Margin="0 15"
-                Grid.ColumnSpan="2"
-                HorizontalTextAlignment="Center"
-                ItemsSource="{Binding Conference}"
-                SelectedItem="{Binding SelectedConference, Mode=TwoWay}"/>
-
-
-
+                    Margin="0 15"
+                    Grid.Column="2"
+                    HorizontalTextAlignment="Center"
+                    ItemsSource="{Binding Conference}"
+                    SelectedItem="{Binding SelectedConference, Mode=TwoWay}"
+                    FontSize="Medium"
+                    FontAttributes="Bold"/>
 
             <VerticalStackLayout Margin="10 0" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}} ">
                 <Label Text="{Binding StandingDivision1}" 

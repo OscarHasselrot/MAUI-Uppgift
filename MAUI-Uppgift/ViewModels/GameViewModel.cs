@@ -26,6 +26,13 @@ namespace MAUI_Uppgift.ViewModels
         async Task LoadGame(GameRequest request)
         {
             ClearError();
+            if (string.IsNullOrWhiteSpace(request.Team))
+            {
+                SetError("Invalid team.");
+                return;
+            }
+            if (IsBusy)
+                return;
             IsBusy = true;
             try
             {
@@ -33,7 +40,6 @@ namespace MAUI_Uppgift.ViewModels
                 if (loaded is null)
                 {
                     SetError("Game not found");
-                    IsBusy = false;
                     return;
                 }
                 var primaryColor = await gamesService.GetHomeTeamPrimaryColor(loaded.HomeTeam);

@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MAUI_Uppgift.Models;
-using MAUI_Uppgift.ViewModels.Base;
 
 namespace MAUI_Uppgift.ViewModels
 {
-    public partial class PeriodItemViewModel: BaseViewModel
+    public partial class PeriodItemViewModel: ObservableObject
     {
         public int PeriodID{ get; }
         [ObservableProperty]

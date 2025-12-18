@@ -35,7 +35,7 @@ namespace MAUI_Uppgift.ViewModels
         string? standingDivision2;
 
         [ObservableProperty]
-        ConferenceEnum? selectedConference;
+        ConferenceEnum selectedConference;
 
 
         public StandingViewModel(StandingService standingService, AppSettings appSettings)
@@ -49,8 +49,8 @@ namespace MAUI_Uppgift.ViewModels
             Seasons.Add(defaultSeason - 1);
             Seasons.Add(defaultSeason - 2);
 
-            Season = appSettings.Season;
             SelectedConference = Conference.First();
+            Season = appSettings.Season;
 
         }
 
@@ -100,10 +100,9 @@ namespace MAUI_Uppgift.ViewModels
                 IsBusy = false;
             }
         }
-        partial void OnSelectedConferenceChanged(ConferenceEnum? value)
+        partial void OnSelectedConferenceChanged(ConferenceEnum value)
         {
-            if (value is null)
-                return;
+       
             _ = LoadStandingsAsync();
 
         }

@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MAUI_Uppgift.ViewModels
 {
-    public partial class GameItemViewModel : BaseViewModel
+    public partial class GameItemViewModel : ObservableObject
     {
         public Game Model { get; private set; } = default!;
 
@@ -19,6 +19,7 @@ namespace MAUI_Uppgift.ViewModels
         [NotifyPropertyChangedFor(nameof(Matchup))]
         string? homeTeam;
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DisplayDate))]
         DateTime dateTime;
         [ObservableProperty]
         int awayTeamScore;
@@ -26,14 +27,12 @@ namespace MAUI_Uppgift.ViewModels
         int homeTeamScore;
         [ObservableProperty]
         string? channel;
-        [ObservableProperty]
-        int attendance;
+
 
         public ObservableCollection<PeriodItemViewModel> Periods { get; } = [];
         public string HomeTeamLogo => $"{(HomeTeam ?? "").ToLowerInvariant()}.png";
         public string AwayTeamLogo => $"{(AwayTeam ?? "").ToLowerInvariant()}.png";
         public string DisplayDate => DateTime.ToString("yyyy-MM-dd");
-        public string DisplayTime => DateTime.ToLocalTime().ToString("HH:mm");
         public string Matchup => $"{AwayTeam} @ {HomeTeam}";
 
         public GameItemViewModel()
@@ -51,7 +50,6 @@ namespace MAUI_Uppgift.ViewModels
             AwayTeamScore = model.AwayTeamScore;
             HomeTeamScore = model.HomeTeamScore;
             Channel = model.Channel;
-            Attendance = model.Attendance;
 
             var incomingPeriods = model.Periods ?? [];
 
@@ -59,9 +57,6 @@ namespace MAUI_Uppgift.ViewModels
             foreach (var period in incomingPeriods)
                 Periods.Add(new PeriodItemViewModel(period));
 
-            OnPropertyChanged(nameof(DisplayDate));
-            OnPropertyChanged(nameof(DisplayTime));
-            OnPropertyChanged(nameof(Matchup));
         }
     }
 }

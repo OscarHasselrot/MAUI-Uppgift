@@ -1,9 +1,9 @@
-﻿using MAUI_Uppgift.Models;
-using MAUI_Uppgift.ViewModels.Base;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MAUI_Uppgift.Models;
 
 namespace MAUI_Uppgift.ViewModels
 {
-    public partial class StandingItemViewModel(Standing model) : BaseViewModel
+    public partial class StandingItemViewModel(Standing model) : ObservableObject
     {
         public Standing Model { get; } = model;
 

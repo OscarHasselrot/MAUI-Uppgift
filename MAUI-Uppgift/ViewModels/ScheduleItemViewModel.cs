@@ -1,10 +1,10 @@
-﻿using MAUI_Uppgift.Models;
-using MAUI_Uppgift.ViewModels.Base;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MAUI_Uppgift.Models;
 using System.Globalization;
 
 namespace MAUI_Uppgift.ViewModels
 {
-    public class ScheduleItemViewModel(ScheduleBasic model) : BaseViewModel
+    public class ScheduleItemViewModel(ScheduleBasic model) : ObservableObject
     {
         public ScheduleBasic Model { get; } = model;
 
