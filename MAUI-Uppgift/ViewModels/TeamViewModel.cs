@@ -79,7 +79,7 @@ namespace MAUI_Uppgift.ViewModels
 
                 if (team is null)
                 {
-                    IsBusy = false;
+                    SetError("Team not found.");
                     return;
                 }
                 SelectedTeam = new TeamItemViewModel(team);
@@ -100,9 +100,9 @@ namespace MAUI_Uppgift.ViewModels
                 }
 
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                SetError("Error loading team");
+                SetError(ex.Message);
             }
             finally
             {

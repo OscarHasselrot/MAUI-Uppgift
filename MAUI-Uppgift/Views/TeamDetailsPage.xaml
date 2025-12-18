@@ -7,10 +7,9 @@
              xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
              x:DataType="viewmodels:TeamViewModel"
              Title="{Binding Title}"
-             BackgroundColor="{Binding PrimaryColor}"
-             >
+             BackgroundColor="{Binding PrimaryColor}">
     <ScrollView>
-        <Grid RowDefinitions="auto, auto, *">
+        <Grid RowDefinitions="auto, auto, 780">
             <Border Style="{StaticResource TeamDetailsBorder}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
                 <views:TeamDetailsView Team="{Binding SelectedTeam}"/>

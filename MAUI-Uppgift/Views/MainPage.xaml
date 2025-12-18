@@ -4,17 +4,24 @@
              xmlns:views="clr-namespace:MAUI_Uppgift.Views" 
              xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls" 
              xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels" x:DataType="viewmodels:StandingViewModel"
-             x:Class="MAUI_Uppgift.Views.MainPage">
+             x:Class="MAUI_Uppgift.Views.MainPage"
+             Title="{Binding Title}">
 
 
-    <Grid RowDefinitions="auto,*">
-        <views:StandingsView Grid.RowSpan="2"/>
+    <Grid RowDefinitions="auto, *">
+        <Picker Title="Season"
+                ItemsSource="{Binding Seasons}"
+                SelectedItem="{Binding Season}"
+                HorizontalOptions="Start"
+                Margin="0 15"/>
+        
+        <views:StandingsView Grid.Row="1"/>
 
         <controllers:BusyOverlay IsBusy="{Binding IsBusy}"
                            ImageSource="nhl_logo.png"
                            ImageSize="48"
-                           Grid.RowSpan="2"/>
-        <controllers:ErrorControl Grid.Row="2"
+                           />
+        <controllers:ErrorControl 
                                  HasError="{Binding HasError}"
                                  ErrorMessage="{Binding ErrorMessage}"/>
 

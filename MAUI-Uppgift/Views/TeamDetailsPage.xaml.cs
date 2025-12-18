@@ -2,20 +2,9 @@ using MAUI_Uppgift.ViewModels;
 
 namespace MAUI_Uppgift.Views;
 
-[QueryProperty(nameof(Abbreviation), "abbr")]
-public partial class TeamDetailsPage : ContentPage
+public partial class TeamDetailsPage : ContentPage, IQueryAttributable
 {
     private readonly TeamViewModel vm;
-
-    public string Abbreviation
-    {
-        get => vm.Abbreviation!;
-        set
-        {
-            vm.Abbreviation = value;
-            vm.LoadAllCommand.Execute(value);
-        }
-    }
 
     public TeamDetailsPage(TeamViewModel vm)
     {
@@ -24,4 +13,20 @@ public partial class TeamDetailsPage : ContentPage
         BindingContext = vm;
     }
 
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if(!query.TryGetValue("abbr", out var abbrObj) || abbrObj is null)
+        {
+            vm.SetError("Missing parameter to load teamdetails.");
+            return;
+        }
+        var abbr = abbrObj.ToString();
+        if (string.IsNullOrWhiteSpace(abbr))
+        {
+            vm.SetError("Invalid team abbreviation");
+            return;
+        }
+        vm.ClearError();
+        vm.LoadAllCommand.Execute(abbr);
+    }
 }

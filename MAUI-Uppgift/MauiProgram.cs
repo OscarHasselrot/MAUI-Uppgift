@@ -30,6 +30,7 @@ namespace MAUI_Uppgift
             builder.Services.AddHttpClient<StandingService>();
             builder.Services.AddHttpClient<GameService>();
             builder.Services.AddHttpClient<TeamService>();
+            builder.Services.AddSingleton<AppSettings>();
 
 #if DEBUG
             builder.Logging.AddDebug();

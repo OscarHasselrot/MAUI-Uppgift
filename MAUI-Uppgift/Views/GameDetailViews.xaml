@@ -8,7 +8,7 @@
     <ContentView.Resources>
 
     </ContentView.Resources>
-
+    <ScrollView>
     <VerticalStackLayout>
 
         <Border Style="{StaticResource TeamDetailsBorder}">
@@ -110,4 +110,6 @@
         </Grid>
         </Border>
     </VerticalStackLayout>
+    </ScrollView>
+
 </ContentView>

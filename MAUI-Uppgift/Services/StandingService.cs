@@ -11,11 +11,11 @@ namespace MAUI_Uppgift.Services
         {
             this.httpClient = httpClient;
         }
-        public async Task<(List<Standing> div1, List<Standing> div2)> GetStandingsAsync(string? conference)
+        public async Task<(List<Standing> div1, List<Standing> div2)> GetStandingsAsync(int season, string? conference)
         {
             if (conference is null || (conference != "Eastern" && conference != "Western"))
                 return ([], []);
-            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/Standings/2026?key={Config.ApiKey}";
+            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/Standings/{season}?key={Config.ApiKey}";
 
             using var response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();

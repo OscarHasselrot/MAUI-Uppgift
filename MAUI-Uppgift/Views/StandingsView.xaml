@@ -6,11 +6,12 @@
              xmlns:controllers="clr-namespace:MAUI_Uppgift.Views.Controls"
              x:DataType="viewmodels:StandingViewModel"
              x:Class="MAUI_Uppgift.Views.StandingsView">
-    
-    <Grid RowDefinitions="Auto, auto, *, auto,  *"
+    <ScrollView>
+
+        <Grid RowDefinitions="Auto, auto, *, auto,  *"
           ColumnDefinitions="80, *">
 
-        <Picker Title="Select Conference"
+            <Picker Title="Select Conference"
                 Margin="0 15"
                 Grid.ColumnSpan="2"
                 HorizontalTextAlignment="Center"
@@ -20,16 +21,15 @@
 
 
 
-
-        <VerticalStackLayout Margin="10 0" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}} ">
-            <Label Text="{Binding StandingDivision1}" 
+            <VerticalStackLayout Margin="10 0" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}} ">
+                <Label Text="{Binding StandingDivision1}" 
                        HorizontalTextAlignment="Center" 
                        FontAttributes="Bold"
                        IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
-            <CollectionView HeaderTemplate="{StaticResource StandingHeaderRow}"
+                <CollectionView HeaderTemplate="{StaticResource StandingHeaderRow}"
                         Margin="0 15"
                         IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
-            <CollectionView 
+                <CollectionView 
                         x:Name="StandingsCollection1"
                         ItemTemplate="{StaticResource StandingRowTemplate}"
                         ItemsSource="{Binding Standings1}"
@@ -38,19 +38,19 @@
                         SelectedItem="{Binding SelectedStanding1, Mode=TwoWay}"
                         SelectionChangedCommand="{Binding SelectTeamCommand}"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StandingsCollection1}}"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Margin="10 0" Grid.Row="2" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}}">
-            <Label Text="{Binding StandingDivision2}" 
+            </VerticalStackLayout>
+            <VerticalStackLayout Margin="10 0" Grid.Row="2" Grid.ColumnSpan="2" IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}}">
+                <Label Text="{Binding StandingDivision2}" 
                        HorizontalTextAlignment="Center" 
                        FontAttributes="Bold"
                        IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
-            <CollectionView HeaderTemplate="{StaticResource StandingHeaderRow}"
+                <CollectionView HeaderTemplate="{StaticResource StandingHeaderRow}"
                         Grid.Row="3"
                         Grid.ColumnSpan="2"
                         Margin="0 15"
                         IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"/>
 
-            <CollectionView Grid.Row="4"
+                <CollectionView Grid.Row="4"
                         Grid.ColumnSpan="2"
                         x:Name="StandingsCollection2"
                         Margin="0 15"
@@ -60,6 +60,8 @@
                         SelectionMode="Single"
                         SelectionChangedCommand="{Binding SelectTeamCommand}"
                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StandingsCollection2}}"/>
-        </VerticalStackLayout>
-    </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+
 </ContentView>

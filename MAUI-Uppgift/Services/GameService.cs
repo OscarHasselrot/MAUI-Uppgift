@@ -6,14 +6,17 @@ namespace MAUI_Uppgift.Services
     public class GameService
     {
         private readonly HttpClient httpClient;
-        public GameService(HttpClient httpClient)
+        private readonly AppSettings appSettings;
+
+        public GameService(HttpClient httpClient, AppSettings appSettings)
         {
             this.httpClient = httpClient;
+            this.appSettings = appSettings;
         }
 
         public async Task<List<ScheduleBasic>> GetPreviousGamesByTeam(string abbreviation)
         {
-            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/SchedulesBasic/2026?key={Config.ApiKey}";
+            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/SchedulesBasic/{appSettings.Season}?key={Config.ApiKey}";
             using var response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var schedule = await response.Content.ReadFromJsonAsync<List<ScheduleBasic>>();
@@ -30,7 +33,7 @@ namespace MAUI_Uppgift.Services
         }
         public async Task<List<ScheduleBasic>> GetUpcomingGamesByTeam(string abbreviation)
         {
-            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/SchedulesBasic/2026?key={Config.ApiKey}";
+            var url = $"https://api.sportsdata.io/v3/nhl/scores/json/SchedulesBasic/{appSettings.Season}?key={Config.ApiKey}";
             using var response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var schedule = await response.Content.ReadFromJsonAsync<List<ScheduleBasic>>();

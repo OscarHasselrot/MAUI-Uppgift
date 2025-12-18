@@ -10,7 +10,11 @@ namespace MAUI_Uppgift.ViewModels
     public partial class StandingViewModel : BaseViewModel
     {
         private readonly StandingService standingService;
+        private readonly AppSettings appSettings;
 
+        public ObservableCollection<int> Seasons { get; } = new();
+        [ObservableProperty]
+        int season;
         [ObservableProperty]
         ObservableCollection<StandingItemViewModel> standings1 = [];
         [ObservableProperty]
@@ -34,14 +38,23 @@ namespace MAUI_Uppgift.ViewModels
         ConferenceEnum? selectedConference;
 
 
-        public StandingViewModel(StandingService standingService)
+        public StandingViewModel(StandingService standingService, AppSettings appSettings)
         {
             this.standingService = standingService;
+            this.appSettings = appSettings;
+
+            var defaultSeason = GetDefaultSeason();
+            Seasons.Clear();
+            Seasons.Add(defaultSeason);
+            Seasons.Add(defaultSeason - 1);
+            Seasons.Add(defaultSeason - 2);
+
+            Season = appSettings.Season;
             SelectedConference = Conference.First();
 
         }
-        [RelayCommand]
 
+        [RelayCommand]
         async Task SelectTeamAsync(StandingItemViewModel? selected)
         {
             if (selected is null)
@@ -63,7 +76,7 @@ namespace MAUI_Uppgift.ViewModels
             {
                 Standings1.Clear();
                 Standings2.Clear();
-                Title = $"NHL Standings";
+                Title = $"NHL Standings {Season}";
 
                 var conference = SelectedConference;
 
@@ -71,14 +84,14 @@ namespace MAUI_Uppgift.ViewModels
                     ? ("Atlantic Division", "Metropolitan Division")
                     : ("Central Division", "Pacific Division");
 
-                var (div1, div2) = await standingService.GetStandingsAsync(conference.ToString());
+                var (div1, div2) = await standingService.GetStandingsAsync(Season, conference.ToString());
                 foreach (var standing in div1)
                     Standings1.Add(new StandingItemViewModel(standing));
 
                 foreach (var standing in div2)
                     Standings2.Add(new StandingItemViewModel(standing));
             }
-            catch (Exception )
+            catch (Exception)
             {
                 SetError($"Unable to load standings: Check internet connection and try again.");
             }
@@ -94,6 +107,16 @@ namespace MAUI_Uppgift.ViewModels
             _ = LoadStandingsAsync();
 
         }
-
+        partial void OnSeasonChanged(int value)
+        {
+            appSettings.Season = value;
+            if(!IsBusy)
+                LoadStandingsCommand.Execute(null);
+        }
+        private static int GetDefaultSeason()
+        {
+            var now = DateTime.UtcNow;
+            return now.Month >= 9 ? now.Year + 1 : now.Year;
+        }
     }
 }

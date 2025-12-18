@@ -60,6 +60,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="appsettings.json" />
+		<EmbeddedResource Include="appsettings.sample.json" />
 	</ItemGroup>
 
 	<ItemGroup>

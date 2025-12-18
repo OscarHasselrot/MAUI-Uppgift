@@ -17,7 +17,6 @@ public partial class GameDetailPage : ContentPage, IQueryAttributable
     }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        vm.IsBusy = true;
         try
         {
             if (!query.TryGetValue("date", out var dateObj) ||
