@@ -21,7 +21,7 @@
                     FontSize="Medium"/>
             <Picker Title="Select Conference"
                     Margin="0 15"
-                    Grid.Column="2"
+                    Grid.Column="1"
                     HorizontalTextAlignment="Center"
                     ItemsSource="{Binding Conference}"
                     SelectedItem="{Binding SelectedConference, Mode=TwoWay}"
