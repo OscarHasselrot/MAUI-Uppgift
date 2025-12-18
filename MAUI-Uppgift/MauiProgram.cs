@@ -20,14 +20,17 @@ namespace MAUI_Uppgift
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
             builder.Services.AddTransient<MainPage>();
-            builder.Services.AddTransient<StandingViewModel>();
-            builder.Services.AddTransient<StandingService>();
-            builder.Services.AddTransient<TeamDetailsPage>();
-            builder.Services.AddTransient<TeamViewModel>();
-            builder.Services.AddTransient<TeamService>();
-            builder.Services.AddTransient<GameViewModel>();
-            builder.Services.AddTransient<GameService>();
             builder.Services.AddTransient<GameDetailPage>();
+            builder.Services.AddTransient<TeamDetailsPage>();
+
+            builder.Services.AddTransient<StandingViewModel>();
+            builder.Services.AddTransient<TeamViewModel>();
+            builder.Services.AddTransient<GameViewModel>();
+
+            builder.Services.AddHttpClient<StandingService>();
+            builder.Services.AddHttpClient<GameService>();
+            builder.Services.AddHttpClient<TeamService>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

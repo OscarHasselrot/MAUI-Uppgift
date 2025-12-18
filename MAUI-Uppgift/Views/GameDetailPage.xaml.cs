@@ -17,6 +17,7 @@ public partial class GameDetailPage : ContentPage, IQueryAttributable
     }
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        vm.IsBusy = true;
         try
         {
             if (!query.TryGetValue("date", out var dateObj) ||
@@ -39,6 +40,7 @@ public partial class GameDetailPage : ContentPage, IQueryAttributable
                 vm.SetError("Missing parameter (date/team) to load matchdeatils.");
                 return;
             }
+            vm.IsBusy = false;
             vm.LoadGameCommand.Execute(new GameViewModel.GameRequest(date, team));
         }
         catch (Exception ex)

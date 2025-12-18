@@ -9,7 +9,6 @@ namespace MAUI_Uppgift.Views
         {
             InitializeComponent();
             BindingContext = vm;
-            vm.LoadStandingsCommand.Execute(null);
         }
     }
 }

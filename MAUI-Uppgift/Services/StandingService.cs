@@ -7,9 +7,9 @@ namespace MAUI_Uppgift.Services
     public class StandingService
     {
         HttpClient httpClient;
-        public StandingService()
+        public StandingService(HttpClient httpClient)
         {
-            httpClient = new HttpClient();
+            this.httpClient = httpClient;
         }
         public async Task<(List<Standing> div1, List<Standing> div2)> GetStandingsAsync(string? conference)
         {

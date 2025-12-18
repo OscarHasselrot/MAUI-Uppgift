@@ -8,8 +8,8 @@ namespace MAUI_Uppgift.ViewModels
     {
         public ScheduleBasic Model { get; } = model;
 
-        public string HomeLogoPath => $"/teams/{Model.HomeTeam.ToLower()}.png";
-        public string AwayLogoPath => $"/teams/{Model.AwayTeam.ToLower()}.png";
+        public string HomeLogoPath => $"{Model.HomeTeam.ToLowerInvariant()}.png";
+        public string AwayLogoPath => $"{Model.AwayTeam.ToLowerInvariant()}.png";
         public string DisplayDate => Model.DateTimeUTC?.ToLocalTime().ToString("g") ?? string.Empty;
         public string DateKey => Model.DateTime?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
         public string AwayTeamScore => Model.AwayTeamScore?.ToString() ?? "-";

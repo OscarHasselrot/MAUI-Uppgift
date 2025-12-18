@@ -17,9 +17,9 @@ namespace MAUI_Uppgift.ViewModels
 
         [ObservableProperty]
         GameItemViewModel? currentGame;
-        public GameViewModel()
+        public GameViewModel(GameService gameService)
         {
-            gamesService = new GameService();
+            this.gamesService = gameService;
         }
 
         [RelayCommand]

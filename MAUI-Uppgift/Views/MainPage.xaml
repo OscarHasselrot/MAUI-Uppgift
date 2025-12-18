@@ -8,15 +8,13 @@
 
 
     <Grid RowDefinitions="auto,*">
-        <views:StandingsView/>
+        <views:StandingsView Grid.RowSpan="2"/>
 
         <controllers:BusyOverlay IsBusy="{Binding IsBusy}"
                            ImageSource="nhl_logo.png"
                            ImageSize="48"
-                           Grid.ColumnSpan="2"
                            Grid.RowSpan="2"/>
         <controllers:ErrorControl Grid.Row="2"
-                                 Grid.ColumnSpan="2"
                                  HasError="{Binding HasError}"
                                  ErrorMessage="{Binding ErrorMessage}"/>
 

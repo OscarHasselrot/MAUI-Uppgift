@@ -6,9 +6,9 @@ namespace MAUI_Uppgift.Services
     public class GameService
     {
         private readonly HttpClient httpClient;
-        public GameService()
+        public GameService(HttpClient httpClient)
         {
-            httpClient = new HttpClient();
+            this.httpClient = httpClient;
         }
 
         public async Task<List<ScheduleBasic>> GetPreviousGamesByTeam(string abbreviation)

@@ -10,7 +10,7 @@ namespace MAUI_Uppgift.ViewModels
     public partial class TeamViewModel : BaseViewModel
     {
         private readonly TeamService teamService;
-        private readonly GameService scheduleService;
+        private readonly GameService gameService;
         [ObservableProperty]
         TeamItemViewModel? selectedTeam;
         [ObservableProperty]
@@ -27,12 +27,11 @@ namespace MAUI_Uppgift.ViewModels
         bool isPreviousGamesExpanded = true;
         [ObservableProperty]
         private ScheduleItemViewModel? selectedPreviousGame;
-        [ObservableProperty]
-        private ScheduleItemViewModel? selectedUpcomingGame;
-        public TeamViewModel()
+
+        public TeamViewModel(GameService gameService, TeamService teamService)
         {
-            teamService = new TeamService();
-            scheduleService = new GameService();
+            this.teamService = teamService;
+            this.gameService = gameService;
         }
 
         [RelayCommand]
@@ -51,7 +50,7 @@ namespace MAUI_Uppgift.ViewModels
             });
 
             SelectedPreviousGame = null;
-            SelectedUpcomingGame = null;
+
         }
 
         [RelayCommand]
@@ -69,8 +68,8 @@ namespace MAUI_Uppgift.ViewModels
                 UpcomingGames.Clear();
 
                 var teamsTask = teamService.GetTeamByAbbreviationAsync(abbreviation);
-                var previousGamesTask = scheduleService.GetPreviousGamesByTeam(abbreviation);
-                var upcomingGamesTask = scheduleService.GetUpcomingGamesByTeam(abbreviation);
+                var previousGamesTask = gameService.GetPreviousGamesByTeam(abbreviation);
+                var upcomingGamesTask = gameService.GetUpcomingGamesByTeam(abbreviation);
 
                 await Task.WhenAll(teamsTask, previousGamesTask, upcomingGamesTask);
 

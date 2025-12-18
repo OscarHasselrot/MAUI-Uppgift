@@ -34,9 +34,9 @@ namespace MAUI_Uppgift.ViewModels
         ConferenceEnum? selectedConference;
 
 
-        public StandingViewModel()
+        public StandingViewModel(StandingService standingService)
         {
-            standingService = new StandingService();
+            this.standingService = standingService;
             SelectedConference = Conference.First();
 
         }

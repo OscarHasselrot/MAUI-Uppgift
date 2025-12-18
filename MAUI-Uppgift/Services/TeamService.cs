@@ -6,9 +6,9 @@ namespace MAUI_Uppgift.Services
     public class TeamService
     {
         private readonly HttpClient httpClient;
-        public TeamService()
+        public TeamService(HttpClient httpClient)
         {
-            this.httpClient = new HttpClient();
+            this.httpClient = httpClient;
         }
         public async Task<Team?> GetTeamByAbbreviationAsync(string team)
         {

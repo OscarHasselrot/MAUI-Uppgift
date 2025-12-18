@@ -30,8 +30,8 @@ namespace MAUI_Uppgift.ViewModels
         int attendance;
 
         public ObservableCollection<PeriodItemViewModel> Periods { get; } = [];
-        public string HomeTeamLogo => $"teams/{(HomeTeam ?? "").ToLowerInvariant()}.png";
-        public string AwayTeamLogo => $"teams/{(AwayTeam ?? "").ToLowerInvariant()}.png";
+        public string HomeTeamLogo => $"{(HomeTeam ?? "").ToLowerInvariant()}.png";
+        public string AwayTeamLogo => $"{(AwayTeam ?? "").ToLowerInvariant()}.png";
         public string DisplayDate => DateTime.ToString("yyyy-MM-dd");
         public string DisplayTime => DateTime.ToLocalTime().ToString("HH:mm");
         public string Matchup => $"{AwayTeam} @ {HomeTeam}";

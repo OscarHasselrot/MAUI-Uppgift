@@ -7,13 +7,14 @@
     x:Class="MAUI_Uppgift.Views.GameDetailPage"
     x:DataType="viewmodel:GameViewModel"
     Title="{Binding CurrentGame.Matchup}"
-    BackgroundColor="{Binding PrimaryColor}">
+    BackgroundColor="{Binding PrimaryColor}"
+    x:Name="Root">
 
     <Grid Padding="12">
 
 
-        <views:GameDetailViews BindingContext="{Binding CurrentGame}"
-                               IsVisible="{Binding HasError, Converter={StaticResource InvertedBoolConverter}}"/>
+        <views:GameDetailViews IsVisible="{Binding Source={x:Reference Root}, Path=BindingContext.IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                               BindingContext="{Binding CurrentGame}"/>
 
         <controllers:BusyOverlay IsBusy="{Binding IsBusy}"
                                  ImageSource="nhl_logo.png"
@@ -21,8 +22,7 @@
                                  />
 
         <controllers:ErrorControl HasError="{Binding HasError}"
-                                  ErrorMessage="{Binding ErrorMessage}"
-                                  />
+                                  ErrorMessage="{Binding ErrorMessage}"/>
 
 
     </Grid>
