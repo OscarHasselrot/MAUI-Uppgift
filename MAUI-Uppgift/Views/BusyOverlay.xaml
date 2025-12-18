@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Uppgift.Views.BusyOverlay"
+             x:Name="Root">
+    <Grid IsVisible="{Binding IsBusy, Source={x:Reference Root}}"
+          HorizontalOptions="Fill"
+          VerticalOptions="Fill"
+          InputTransparent="False">
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsBusy, Source={x:Reference Root}}"
+                               IsVisible="{Binding IsBusy, Source={x:Reference Root}}"/>
+            <Image x:Name="LoadingImage"
+                   Source="{Binding ImageSource, Source={x:Reference Root}}"
+                   WidthRequest="{Binding ImageSize, Source={x:Reference Root}}"
+                   HeightRequest="{Binding ImageSize, Source={x:Reference Root}}"/>
+        </Grid>
+    </Grid>
+</ContentView>

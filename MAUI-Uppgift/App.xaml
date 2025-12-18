@@ -1,0 +1,135 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:MAUI_Uppgift.Views"
+             xmlns:models="clr-namespace:MAUI_Uppgift.Models"
+             xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels"
+             x:Class="MAUI_Uppgift.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Grid" x:Key="TeamDetailsGrid">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style TargetType="Border" x:Key="TeamDetailsBorder">
+                <Setter Property="StrokeShape" Value="5"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Margin" Value="5,10"/>
+                <Setter Property="Shadow" Value="#FFFFF 0 5"/>
+            </Style>
+            <Style TargetType="Border" x:Key="UpcomingGamesBorder"
+                   BasedOn="{StaticResource TeamDetailsBorder}">
+                <Setter Property="WidthRequest" Value="126"/>
+                <Setter Property="HeightRequest" Value="100"/>
+            </Style>
+            <Style TargetType="Label" x:Key="TitleLabel">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="Title"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="Black"/>
+            </Style>
+
+            <DataTemplate x:Key="PlayerHeaderRow">
+                <Grid ColumnDefinitions="60,*,*" 
+                      Padding="8">
+                    <Label Text="#" 
+                           Grid.Column="0" 
+                           FontAttributes="Italic"/>
+                    <Label Text="Name" 
+                           Grid.Column="1" 
+                           FontAttributes="Italic" />
+                    <Label Text="Position" 
+                           Grid.Column="2" 
+                           FontAttributes="Italic" />
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="PlayerRowTemplate" x:DataType="models:Player">
+                <Grid ColumnDefinitions="60,*,*" Padding="8">
+                    <Label Text="{Binding Jersey}" Grid.Column="0" FontAttributes="Bold"/>
+                    <Label Text="{Binding DisplayName}" Grid.Column="1" FontAttributes="Bold"/>
+                    <Label Text="{Binding Position}" Grid.Column="2"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="StandingHeaderRow"
+                          x:DataType="models:Standing">
+                <Grid ColumnDefinitions="40,*,40,40,40,40,40" 
+                      Padding="8">
+                    <Label Text="Team" 
+                           Grid.Column="0" 
+                           FontAttributes="Italic,Bold"/>
+                    <Label Text="GP" 
+                           Grid.Column="2" 
+                           FontAttributes="Italic,Bold" />
+                    <Label Text="W" 
+                           Grid.Column="3" 
+                            FontAttributes="Italic,Bold" />
+                    <Label Text="L" 
+                           Grid.Column="4" 
+                           FontAttributes="Italic,Bold" />
+                    <Label Text="OTL" 
+                           Grid.Column="5" 
+                           FontAttributes="Italic,Bold" />
+                    <Label Text="Pts" 
+                           Grid.Column="6" 
+                           FontAttributes="Italic,Bold"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="StandingRowTemplate">
+                <Grid ColumnDefinitions="20, *,40,40,40,40,40" Padding="8">
+                    <Image Source="{Binding LogoPath}" Grid.Column="0"
+                           HeightRequest="20"
+                           WidthRequest="20"/>
+                    <Label Text="{Binding Name}" Grid.Column="1" FontAttributes="Bold" Margin="0 5"/>
+                    <Label Text="{Binding GamesPlayed}" Grid.Column="2"/>
+                    <Label Text="{Binding Wins}" Grid.Column="3"/>
+                    <Label Text="{Binding Losses}" Grid.Column="4"/>
+                    <Label Text="{Binding OvertimeLosses}" Grid.Column="5"/>
+                    <Label Text="{Binding Points}" Grid.Column="6"/>
+                </Grid>
+            </DataTemplate>
+        
+            <DataTemplate x:Key="PreviousGamesRowTemplate" >
+                <VerticalStackLayout>
+                    <Border Style="{StaticResource TeamDetailsBorder}">
+                        <Grid RowDefinitions="*,50" ColumnDefinitions="*,*,*" Padding="8">
+                            <Label Text="{Binding DisplayDate}" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            <Image Source="{Binding AwayLogoPath}" Grid.Row="1" Grid.Column="0" WidthRequest="60"/>
+                            <Image Source="{Binding HomeLogoPath}" Grid.Row="1" Grid.Column="2" WidthRequest="60"/>
+                            <HorizontalStackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="{Binding AwayTeamScore}" FontAttributes="Bold" FontSize="Large"/>
+                                <Label Text=" - " FontSize="Large" FontAttributes="Bold"/>
+                                <Label Text="{Binding HomeTeamScore}" FontAttributes="Bold" FontSize="Large"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="UpcomingGamesRowTemplate" >
+                <HorizontalStackLayout HorizontalOptions="Start">
+                    <Border Style="{StaticResource UpcomingGamesBorder}">
+                        <Grid RowDefinitions="*, *" ColumnDefinitions="*,*,*" Padding="8">
+                            <Label Text="{Binding DisplayDate}" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                            <Image Source="{Binding AwayLogoPath}" Grid.Row="1"  Grid.Column="0"/>
+                            <Image Source="{Binding HomeLogoPath}" Grid.Row="1" Grid.Column="2"/>
+                            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
+                                <Label Text="vs" Grid.Row="1" Grid.Column="1" FontSize="Large"/>
+                            </HorizontalStackLayout>
+
+                        </Grid>
+                    </Border>
+                </HorizontalStackLayout>
+            </DataTemplate>
+
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

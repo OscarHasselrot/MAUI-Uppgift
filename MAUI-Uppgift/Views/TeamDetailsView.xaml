@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MAUI_Uppgift.ViewModels"
+             x:DataType="viewmodels:TeamItemViewModel"
+             x:Class="MAUI_Uppgift.Views.TeamDetailsView"
+             x:Name="Root">
+    <Grid Style="{StaticResource TeamDetailsGrid}"
+                      BindingContext="{Binding Source={x:Reference Root}, Path=Team}"
+                      ColumnDefinitions="*,110" 
+                      Padding="8">
+        <VerticalStackLayout Grid.Column="0" 
+                             Margin="10">
+            <HorizontalStackLayout>
+                <Label Text="{Binding Division}" 
+                       Style="{StaticResource TitleLabel}"/>
+                <Label Text=" Division"
+                       Style="{StaticResource TitleLabel}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Conference}" FontAttributes="Italic"/>
+                <Label Text=" Conference" FontAttributes="Italic"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout >
+                <Label Text="Head coach: "/>
+                <Label Text="{Binding HeadCoach}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <Image Source="{Binding LogoPath}"
+               WidthRequest="110"
+               Margin="10"
+               Grid.Column="1"/>
+    </Grid>
+</ContentView>
