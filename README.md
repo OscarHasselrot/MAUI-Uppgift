@@ -47,7 +47,7 @@ Navigation is handled using `Shell` routing with query parameters.
 
 Examples:
 - Team details page receives the team abbreviation as a query parameter.
-- Game details page receives the game ID as a query parameter.
+- Game details page receives the game date and team abbreviation as  query parameters.
 
 ViewModels implement IQueryAttributable to extract parameters during navigation.
 
